@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas' Glitch Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #00ff99;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 2px solid #00ff99;
+        }
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 0 0 10px #00ff99;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #99ffd6;
+            margin-top: 0.5rem;
+        }
+        .intro, .projects, .profile, .comments {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #111;
+            border: 1px solid #00ff99;
+            box-shadow: 0 0 15px #004d33;
+        }
+        .intro p, .projects p, .profile p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #ccffe6;
+        }
+        .comments h2, .projects h2, .profile h2 {
+            margin-top: 0;
+            color: #00ffaa;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: #000;
+            border: 1px solid #00ff99;
+            color: #00ffcc;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        button {
+            padding: 0.6rem 1.2rem;
+            background-color: #00ff99;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00ffaa;
+        }
+        #secretBtn {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: #0a0a0a;
+            border: none;
+            font-size: 1px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lucas' Terminal</h1>
+        <p>glitchy, cozy, and coded with care.</p>
+    </header>
+
+    <section class="intro">
+        <p>Hello there! I'm Lucas, a passionate beginner in the coding world, navigating the exciting realms of Python, JavaScript, and web development. This site is my little corner of the web — where I share my progress, projects, and digital experiments. Whether you're just passing through or looking to collaborate, welcome aboard!</p>
+    </section>
+
+    <section class="profile">
+        <h2>About Me</h2>
+        <p><strong>Pronouns:</strong> He/They</p>
+        <p><strong>Local Time:</strong> <span id="localTime"></span></p>
+        <p><strong>Languages:</strong></p>
+        <ul>
+            <li>Python — Beginner</li>
+            <li>JavaScript — Beginner</li>
+            <li>Lua — Intermediate (for Roblox)</li>
+            <li>HTML/CSS — Intermediate</li>
+        </ul>
+    </section>
+
+    <section class="projects">
+        <h2>Current Projects</h2>
+        <p>- Building a roblox story game from scratch called Dead Shift</p>
+        <p>- Developing a Minecraft mod called <em>AeroLegion</em> that includes Magic.</p>
+        <p>- (i dont remember what else im doing right now)</em></p>
+    </section>
+    <button id="secretBtn" onclick="window.location.href='admin.html'">.</button>
+
+    <script>
+        // Display Pacific Time (PT)
+        function updatePacificTime() {
+            const now = new Date();
+            // Convert to UTC
+            let utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            // PDT is UTC-7, PST is UTC-8
+            let pacificOffset = -7; // PDT default
+            let month = now.getMonth();
+            if (month < 2 || month > 10) pacificOffset = -8; // PST
+            let pacific = new Date(utc + (3600000 * pacificOffset));
+            document.getElementById("localTime").textContent = pacific.toLocaleString('en-US', {
+                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+            }) + ' PT';
+        }
+        setInterval(updatePacificTime, 1000);
+        updatePacificTime();
+    </script>
+</body>
+</html>
